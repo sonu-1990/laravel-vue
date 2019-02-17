@@ -147,5 +147,9 @@ Route::get('/admin', function(){
     }
 })
 
+// Search for admin lte
+// download it and go to github release and get the vesion of pro release.
 // npm install admin-lte@v3.0.0-alpha.2 --save
+
+// vue router
 ?>

@@ -1,27 +1,17 @@
 <template>
-    <div>
-        <!-- Content Header (Page header) -->
-    <section class="content-header">
-            <div class="container-fluid">
-              <div class="rowd">
-                <div class="col-md-8">
-                  <h1>Category List</h1>
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">
-                        <button class="btn btn-primary">
-                        Add Category
-                        </button>
-                    </li>
-                </ol>
-                </div>
-              </div>
-            </div><!-- /.container-fluid -->
-          </section>
-           <!-- Main content -->
-    <section class="content">
-            <div class="row">
+        <!-- Main content -->
+        <section class="content">
+           
+            <div class="row justify-content-around">
               <div class="col-8">
                 <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Category List</h3>
+                        <div class="card-tools">
+                            <router-link to="/add-category" class="btn btn-primary" >Add Category</router-link>
+                        </div>
+                    </div>
+                    
                   <!-- /.card-header -->
                   <div class="card-body">
                     <table id="example2" class="table table-bordered table-hover">
@@ -53,7 +43,7 @@
             </div>
             <!-- /.row -->
           </section>
-    </div>
+    
 </template>
 <script>
     export default {
@@ -64,4 +54,10 @@
     }
 </script>
 <style scoped>
+    .card-body {
+        padding-top:20px;
+    }
+    .card-header {
+        padding: 18px 7px;
+    }
 </style>

@@ -18,10 +18,13 @@ Vue.use(VueRouter)
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('adminmaster-component', require('./components/admin/AdminMasterComponent.vue'));
 
+import { routes } from './routes';
 
 const router = new VueRouter({
-    //routes // short for `routes: routes`
+    routes,// short for `routes: routes`
+    mode : 'history'
   })
 const app = new Vue({
     el: '#app',

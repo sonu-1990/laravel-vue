@@ -973,6 +973,7 @@ module.exports = __webpack_require__(43);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__routes__ = __webpack_require__(56);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -993,9 +994,13 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
  */
 
 Vue.component('example-component', __webpack_require__(39));
+Vue.component('adminmaster-component', __webpack_require__(59));
+
+
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
-  //routes // short for `routes: routes`
+  routes: __WEBPACK_IMPORTED_MODULE_1__routes__["a" /* routes */], // short for `routes: routes`
+  mode: 'history'
 });
 var app = new Vue({
   el: '#app',
@@ -47064,6 +47069,206 @@ if (inBrowser && window.Vue) {
 
 /* harmony default export */ __webpack_exports__["a"] = (VueRouter);
 
+
+/***/ }),
+/* 56 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return routes; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_admin_AdminHomeComponent_vue__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_admin_AdminHomeComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_admin_AdminHomeComponent_vue__);
+
+var routes = [{ path: '/home', component: __WEBPACK_IMPORTED_MODULE_0__components_admin_AdminHomeComponent_vue___default.a }];
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(58)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/admin/AdminHomeComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-384ce246", Component.options)
+  } else {
+    hotAPI.reload("data-v-384ce246", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("h3", { staticClass: "card-title" }, [_vm._v("Title")]),
+          _vm._v(" "),
+          _c("p"),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-tools" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-tool",
+                attrs: {
+                  type: "button",
+                  "data-widget": "collapse",
+                  "data-toggle": "tooltip",
+                  title: "Collapse"
+                }
+              },
+              [_c("i", { staticClass: "fa fa-minus" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-tool",
+                attrs: {
+                  type: "button",
+                  "data-widget": "remove",
+                  "data-toggle": "tooltip",
+                  title: "Remove"
+                }
+              },
+              [_c("i", { staticClass: "fa fa-times" })]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _vm._v(
+            "\n          Start creating your amazing application....!\n        "
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-footer" }, [
+          _vm._v("\n          Footer\n        ")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-384ce246", module.exports)
+  }
+}
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(60)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/admin/AdminMasterComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-00fd45a3", Component.options)
+  } else {
+    hotAPI.reload("data-v-00fd45a3", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "adminmain" } }, [_c("router-view")], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-00fd45a3", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

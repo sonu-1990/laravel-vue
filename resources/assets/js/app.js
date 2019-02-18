@@ -1,32 +1,58 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
-
 window.Vue = require('vue');
+
+// editor support
+import 'v-markdown-editor/dist/index.css';
+import Editor from 'v-markdown-editor'
+Vue.use(Editor);
+// Support vuex
+import Vuex from 'vuex'
+Vue.use(Vuex)
+// import storeData from "./store/index"
+// const store = new Vuex.Store(
+//     storeData
+// )
+//support moment js
+// import {filter} from './filter'
+// vue router
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+import {routes} from './routes';
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('adminmaster-component', require('./components/admin/AdminMasterComponent.vue'));
+// Vue.component('home-main', require('./components/public/PublicMaster.vue'));
 
-import { routes } from './routes';
+import { Form, HasError, AlertError } from 'vform'
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+window.Form = Form;
+// Sweet alert 2
+import swal from 'sweetalert2'
+window.swal = swal;
+const toast = swal.mixin({
+    position: 'center',
+    // type: 'success',
+    // title: 'Your work has been saved', 
+    showConfirmButton: false,
+    timer: 3000
+});
+
+window.toast = toast
 
 const router = new VueRouter({
-    routes,// short for `routes: routes`
-    mode : 'history'
-  })
+    routes, // short for `routes: routes`
+    mode:'history',
+
+})
+
+
+
 const app = new Vue({
     el: '#app',
     router
+    // store,
+
 });

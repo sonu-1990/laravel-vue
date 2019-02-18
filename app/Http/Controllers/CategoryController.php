@@ -27,5 +27,13 @@ class CategoryController extends Controller
         $category->cat_name = $request->cat_name;
         $category->save();
         return ['message'=>'OK'];
-    }
+	}
+	
+	public function allCategory()
+	{
+		$categories = Category::orderBy('id', 'DESC')->get();
+		return response()->json([
+			'categories' => $categories
+		], 200);
+	}
 }

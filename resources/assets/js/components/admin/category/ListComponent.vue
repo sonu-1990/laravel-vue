@@ -23,9 +23,9 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Category Name
+                      <tr v-for="(category, index) in getAllCategory" :key="category.id">
+                        <td>{{index+1}}</td>
+                        <td>{{ category.cat_name }}
                         </td>
                         <td>
                             <a href="">Edit</a>
@@ -48,8 +48,16 @@
 <script>
     export default {
         name:"ListComponent",
+        computed: {
+            getAllCategory() {
+                return this.$store.getters.getCategory
+            }
+        },
         mounted() {
-            console.log('Component mounted.')
+            this.$store.dispatch('allCategory')
+        },
+        methods: {
+
         }
     }
 </script>

@@ -8,10 +8,10 @@ Vue.use(Editor);
 // Support vuex
 import Vuex from 'vuex'
 Vue.use(Vuex)
-// import storeData from "./store/index"
-// const store = new Vuex.Store(
-//     storeData
-// )
+import storeData from "./store/index"
+const store = new Vuex.Store(
+    storeData
+)
 //support moment js
 // import {filter} from './filter'
 // vue router
@@ -34,8 +34,6 @@ import swal from 'sweetalert2'
 window.swal = swal;
 const toast = swal.mixin({
     position: 'center',
-    // type: 'success',
-    // title: 'Your work has been saved', 
     showConfirmButton: false,
     timer: 3000
 });
@@ -44,7 +42,7 @@ window.toast = toast
 
 const router = new VueRouter({
     routes, // short for `routes: routes`
-    mode:'history',
+    mode:'hash',
 
 })
 
@@ -52,7 +50,7 @@ const router = new VueRouter({
 
 const app = new Vue({
     el: '#app',
-    router
-    // store,
+    router,
+    store
 
 });

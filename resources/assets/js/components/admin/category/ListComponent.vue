@@ -19,17 +19,22 @@
                       <tr>
                         <th>SI</th>
                         <th>Category Name</th>
+                        <th>Created At</th>
                         <th>Actions</th>
                       </tr>
                       </thead>
                       <tbody>
-                      <tr v-for="(category, index) in getAllCategory" :key="category.id">
+                      <tr v-for="(category, index) in getAllCategory" 
+                      :key="category.id">
                         <td>{{index+1}}</td>
                         <td>{{ category.cat_name }}
+                        <td>{{ category.created_at  | timeFormat }}
                         </td>
                         <td>
-                            <a href="">Edit</a>
-                            <a href="">Delete</a>
+                            <!-- <router-link :to="{ name: 'EditCategory', 
+                            params: { categoryId: category.id } }">Edit</router-link> -->
+                                        <router-link :to="`/edit-category/${category.id}`">Edit</router-link>
+                            <a href="" @click.prevent = "deleteCategory(category.id)">Delete</a>
                         </td>
                       </tr>
                       </tbody>
@@ -57,6 +62,20 @@
             this.$store.dispatch('allCategory')
         },
         methods: {
+            deleteCategory(id)
+            {
+                axios.get('/category/'+id,)
+                    .then(() => {
+                        this.$store.dispatch('allCategory')
+                        toast({
+                                type: 'success',
+                                title: 'Category Deleted successfully'
+                        })
+                    })
+                    .catch(() => {
+
+                    })
+            }
 
         }
     }

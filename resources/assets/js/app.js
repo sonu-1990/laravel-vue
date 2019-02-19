@@ -18,6 +18,11 @@ const store = new Vuex.Store(
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+import moment from 'moment';
+Vue.filter('timeFormat', (arg) => {
+    return moment(arg).format("MMM Do YYYY");   
+})
+  
 import {routes} from './routes';
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));

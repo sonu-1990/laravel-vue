@@ -1,13 +1,20 @@
 import AdminHomeComponent from './components/admin/AdminHomeComponent.vue';
 import ExampleComponent from './components/ExampleComponent.vue';
-import ListComponent from './components/admin/category/ListComponent.vue';
-import NewComponent from './components/admin/category/NewComponent.vue';
-import EditComponent from './components/admin/category/EditComponent.vue';
+import CategoryListComponent from './components/admin/category/ListComponent.vue';
+import CategoryAddComponent from './components/admin/category/NewComponent.vue';
+import CategoryEditComponent from './components/admin/category/EditComponent.vue';
+// Post
+import PostListComponent from './components/admin/post/ListComponent.vue';
+import PostAddComponent from './components/admin/post/AddComponent.vue';
+import PostEditComponent from './components/admin/post/EditComponent.vue';
 
 export const routes = [
     { path: '/home', component: AdminHomeComponent },
-    { path: '/post', component: ExampleComponent },
-    { path: '/category-list', component: ListComponent },
-    { path: '/add-category', component: NewComponent },
-    { path: '/edit-category/:categoryId', component: EditComponent}
+    { path: '/category-list', component: CategoryListComponent },
+    { path: '/add-category', component: CategoryAddComponent },
+    { path: '/edit-category/:categoryId', component: CategoryEditComponent},
+    // Post 
+    { path: '/post-list', component: PostListComponent },
+    { path: '/add-post', component: PostAddComponent },
+    { path: '/edit-post/:postId', component: PostEditComponent},
 ];

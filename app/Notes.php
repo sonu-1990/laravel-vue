@@ -2,7 +2,7 @@
 Use Illuminate\Auth\Events\Registered;
 'Illuminate\Auth\Events\Registered' => [
         'App\Listeners\SendWelcomeEmail'
-    ]
+];
 // php artisan event:generate 
 
 // go to SendWelcomeEmail

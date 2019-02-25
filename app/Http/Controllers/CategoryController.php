@@ -46,9 +46,23 @@ class CategoryController extends Controller
 
 	public function editCategory($id)
 	{
+		$this->validate(
+			$request, 
+			[
+				'cat_name'=>'required|min:2|max:50'
+			]
+		);
 		$category = Category::find($id);
 		return response()->json([
 			'category' => $category
 		]);
+	}
+
+	public function updateCategory(Request $request, $id)
+	{
+		$category = Category::find($id);
+		$category->cat_name = $request->cat_name;
+		$category->update();
+		return ['message'=>'OK'];
 	}
 }

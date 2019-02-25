@@ -40587,6 +40587,9 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_4_vue_router__["a" /* default */]);
 Vue.filter('timeFormat', function (arg) {
     return __WEBPACK_IMPORTED_MODULE_5_moment___default()(arg).format("MMM Do YYYY");
 });
+Vue.filter('shortLength', function (text, length, suffix) {
+    return text.substring(0, length) + suffix;
+});
 
 
 
@@ -91334,13 +91337,23 @@ var render = function() {
                       _c("td", [_vm._v(_vm._s(index + 1))]),
                       _vm._v(" "),
                       _c("td", [
-                        _vm._v(_vm._s(post.user_id) + "\n                ")
+                        _vm._v(_vm._s(post.user.name) + "\n                ")
                       ]),
-                      _c("td", [_vm._v(_vm._s(post.cat_id))]),
+                      _c("td", [_vm._v(_vm._s(post.category.cat_name))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(post.title))]),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(_vm._f("shortLength")(post.title, 20, "---"))
+                        )
+                      ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(post.description))]),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("shortLength")(post.description, 40, "...")
+                          )
+                        )
+                      ]),
                       _vm._v(" "),
                       _c("td", [
                         _c("img", {

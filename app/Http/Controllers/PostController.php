@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function allPost()
     {
-        $posts = Post::all();
+        $posts = Post::with('user', 'category')->get();
         return response()->json([
             'posts' => $posts
         ], 200);

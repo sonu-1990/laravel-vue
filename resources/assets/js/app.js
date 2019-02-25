@@ -21,7 +21,10 @@ Vue.use(VueRouter)
 import moment from 'moment';
 Vue.filter('timeFormat', (arg) => {
     return moment(arg).format("MMM Do YYYY");   
-})
+});
+Vue.filter('shortLength', function(text, length, suffix) {
+    return text.substring(0,length) + suffix;
+});
   
 import {routes} from './routes';
 

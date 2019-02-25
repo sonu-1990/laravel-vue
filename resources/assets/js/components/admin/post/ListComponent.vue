@@ -29,10 +29,10 @@
                       <tbody>
                       <tr v-for="(post, index) in getAllPost">
                         <td>{{ index+1 }}</td>
-                        <td>{{ post.user_id }}
-                        <td>{{post.cat_id}}</td>
-                        <td>{{post.title}}</td>
-                        <td>{{post.description}}</td>
+                        <td>{{ post.user.name }}
+                        <td>{{post.category.cat_name }}</td>
+                        <td>{{post.title | shortLength(20, '---')}}</td>
+                        <td>{{post.description | shortLength(40, '...')}}</td>
                         <td><img :src="post.photo" width="100px" height="100px"/></td>
                         <td>
                             

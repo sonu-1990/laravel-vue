@@ -33,9 +33,11 @@
                         <td>{{post.category.cat_name }}</td>
                         <td>{{post.title | shortLength(20, '---')}}</td>
                         <td>{{post.description | shortLength(40, '...')}}</td>
-                        <td><img :src="post.photo" width="100px" height="100px"/></td>
+                        <td><img :src="ourImage(post.photo)" width="100px" height="100px"/></td>
                         <td>
-                            
+                            <a href="" >Edit</a>
+                            <a href="#" @click.prevent="deletePost(post.id)">Delete</a>
+
                             <!-- <router-link :to="`/edit-category/${category.id}`">Edit</router-link>
                             <a href="" @click.prevent = "deleteCategory(category.id)">Delete</a> -->
                         </td>
@@ -66,7 +68,22 @@
                 }
             },
             methods: {
-                
+                ourImage(img) {
+                    return "uploadimage/"+img;
+                },
+                deletePost(id) {
+                    axios.get('/delete-post/'+id)
+                    .then( () => {
+                        this.$store.dispatch('allPosts'); 
+                        toast({
+                                type: 'success',
+                                title: 'Post deleted successfully'
+                        })
+                    })
+                    .catch( () => {
+
+                    })
+                }
             },
         }
     </script>

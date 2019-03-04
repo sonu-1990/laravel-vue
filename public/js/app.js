@@ -87832,13 +87832,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             var file = event.target.files[0];
-            var reader = new FileReader();
-            reader.onload = function (event) {
-                // The file's text will be printed here
-                _this2.form.photo = event.target.result;
-            };
-
-            reader.readAsDataURL(file);
+            if (file.size > 1048576) {
+                swal.fire({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    footer: '<a href>Why do I have this issue?</a>'
+                });
+            } else {
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    // The file's text will be printed here
+                    _this2.form.photo = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
         }
     }
 

@@ -125,13 +125,22 @@
                 },
                 changePhoto(event) {
                     let file = event.target.files[0];
-                    let reader = new FileReader();
-                    reader.onload = event => {
-                        // The file's text will be printed here
-                        this.form.photo = event.target.result
-                    };
-
-                    reader.readAsDataURL(file);
+                    if (file.size > 1048576) {
+                        swal.fire({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                        footer: '<a href>Why do I have this issue?</a>'
+                        })
+                    } else {
+                        let reader = new FileReader();
+                        reader.onload = event => {
+                            // The file's text will be printed here
+                            this.form.photo = event.target.result
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                    
                 }
             },
            

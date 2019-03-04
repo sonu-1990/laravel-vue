@@ -18,6 +18,10 @@ const store = new Vuex.Store(
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+import jQuery from 'jquery'
+window.jQuery = jQuery
+window.$ = jQuery
+
 import moment from 'moment';
 Vue.filter('timeFormat', (arg) => {
     return moment(arg).format("MMM Do YYYY");   
@@ -53,9 +57,6 @@ const router = new VueRouter({
     mode:'hash',
 
 })
-
-
-
 const app = new Vue({
     el: '#app',
     router,

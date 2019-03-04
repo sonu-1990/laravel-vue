@@ -10,6 +10,9 @@ export default {
         },
         getPost(state) {
             return state.post
+        },
+        getCss() {
+            return "Hello"
         }
     },
     actions: {

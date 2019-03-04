@@ -35,11 +35,8 @@
                         <td>{{post.description | shortLength(40, '...')}}</td>
                         <td><img :src="ourImage(post.photo)" width="100px" height="100px"/></td>
                         <td>
-                            <a href="" >Edit</a>
+                            <router-link :to="`/edit-post/${post.id}`" >Edit</router-link>
                             <a href="#" @click.prevent="deletePost(post.id)">Delete</a>
-
-                            <!-- <router-link :to="`/edit-category/${category.id}`">Edit</router-link>
-                            <a href="" @click.prevent = "deleteCategory(category.id)">Delete</a> -->
                         </td>
                       </tr>
                       </tbody>
@@ -66,6 +63,13 @@
                 getAllPost() {
                     return this.$store.getters.getPost
                 }
+            },
+            created(){
+                axios.get(`/edit-post/${this.$route.params.postId}`)
+                .then((response)=>{
+                    //console.log(response.data)
+                    this.form.fill(response.data.post)
+                })
             },
             methods: {
                 ourImage(img) {

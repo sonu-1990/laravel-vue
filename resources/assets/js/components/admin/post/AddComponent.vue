@@ -11,7 +11,9 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form role="form" enctype="multipart/form-data">
+                            <form role="form" enctype="multipart/form-data"
+                            @submit.prevent = "addNewPost()"
+                            >
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="postId">Add New Post</label>
@@ -25,12 +27,8 @@
                                     </div>
                                     <div class="form-group">
                                             <label for="descriptionId">Description</label>
-                                            <textarea 
-                                            :class="{ 'is-invalid': form.errors.has('description') }" 
-                                            class="form-control " id="descriptionId" 
-                                            placeholder="Add New Post" 
-                                            v-model="form.description" name="description" 
-                                            ></textarea>
+                                            <markdown-editor v-model="form.description"
+                                            ></markdown-editor>
                                             <has-error :form="form" field="description"></has-error>
                                     </div>
                                     <div class="form-group">
@@ -111,6 +109,19 @@
             methods:{
                 getallCategory() {
                     return this.$store.getters.getCategory
+                },
+                addNewPost() {
+                    this.form.post('savepost')
+                    .then((response) => {
+                        this.$router.push('/post-list')
+                            toast({
+                                type: 'success',
+                                title: 'Post Added successfully'
+                            })
+                    })
+                    .catch((error) => {
+
+                    })
                 },
                 changePhoto(event) {
                     let file = event.target.files[0];

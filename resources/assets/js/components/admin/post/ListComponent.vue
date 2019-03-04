@@ -29,7 +29,7 @@
                       <tbody>
                       <tr v-for="(post, index) in getAllPost">
                         <td>{{ index+1 }}</td>
-                        <td>{{ post.user.name }}
+                        <td>{{ post.user.name }} </td>
                         <td>{{post.category.cat_name }}</td>
                         <td>{{post.title | shortLength(20, '---')}}</td>
                         <td>{{post.description | shortLength(40, '...')}}</td>
@@ -57,14 +57,17 @@
     <script>
         export default {
             name: "ListComponent",
+            mounted() {
+                this.$store.dispatch('allPosts'); 
+            },
             computed: {
                 getAllPost() {
                     return this.$store.getters.getPost
                 }
             },
-            mounted() {
-                this.$store.dispatch('allPosts');
-            }
+            methods: {
+                
+            },
         }
     </script>
     

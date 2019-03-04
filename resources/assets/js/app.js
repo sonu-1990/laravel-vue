@@ -34,7 +34,7 @@ import {routes} from './routes';
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('adminmaster-component', require('./components/admin/AdminMasterComponent.vue'));
-// Vue.component('home-main', require('./components/public/PublicMaster.vue'));
+Vue.component('publicmaster-component', require('./components/public/PublicMaster.vue'));
 
 import { Form, HasError, AlertError } from 'vform'
 

@@ -7,6 +7,11 @@ import CategoryEditComponent from './components/admin/category/EditComponent.vue
 import PostListComponent from './components/admin/post/ListComponent.vue';
 import PostAddComponent from './components/admin/post/AddComponent.vue';
 import PostEditComponent from './components/admin/post/EditComponent.vue';
+// FrontEnd
+import PublicHomeComponent from './components/public/PublicHome.vue';
+import BlogPostComponent from './components/public/blog/BlogPost.vue';
+
+
 
 export const routes = [
     { path: '/home', component: AdminHomeComponent },
@@ -17,4 +22,10 @@ export const routes = [
     { path: '/post-list', component: PostListComponent },
     { path: '/add-post', component: PostAddComponent },
     { path: '/edit-post/:postId', component: PostEditComponent},
+
+    // Frontend Component
+    { path: '/', component: PublicHomeComponent },
+    { path: '/blog', component: BlogPostComponent },
+
+
 ];

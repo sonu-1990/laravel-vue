@@ -117,6 +117,19 @@
             getallCategory() {
                 return this.$store.getters.getCategory
             },
+            updatePost() {
+                this.form.post(`/update-post/${this.$route.params.postId}`)
+                .then(() =>{
+                    this.$router.push('/post-list')
+                    toast({
+                            type: 'success',
+                            title: 'Post Updated successfully'
+                        })
+                })
+                .catch((error) => {
+
+                })
+            },
             updateImage() {
                 let img = this.form.photo;
                 if (img.length > 100){
@@ -124,7 +137,6 @@
                 } else {
                     return `uploadimage/${this.form.photo}`
                 }
-
             },
             changePhoto(event) {
                 let file = event.target.files[0];

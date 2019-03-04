@@ -38,6 +38,7 @@ Route::get('/all-post', 'PostController@allPost');
 Route::post('/savepost', 'PostController@savepost');
 Route::get('/delete-post/{id}', 'PostController@deletePost');
 Route::get('/edit-post/{id}', 'PostController@editPost');
+Route::post('/update-post/{id}', 'PostController@updatePost');
 
 
 

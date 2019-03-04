@@ -88361,6 +88361,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getallCategory: function getallCategory() {
             return this.$store.getters.getCategory;
         },
+        updatePost: function updatePost() {
+            var _this2 = this;
+
+            this.form.post('/update-post/' + this.$route.params.postId).then(function () {
+                _this2.$router.push('/post-list');
+                toast({
+                    type: 'success',
+                    title: 'Post Updated successfully'
+                });
+            }).catch(function (error) {});
+        },
         updateImage: function updateImage() {
             var img = this.form.photo;
             if (img.length > 100) {
@@ -88370,7 +88381,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         changePhoto: function changePhoto(event) {
-            var _this2 = this;
+            var _this3 = this;
 
             var file = event.target.files[0];
             if (file.size > 1048576) {
@@ -88384,7 +88395,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var reader = new FileReader();
                 reader.onload = function (event) {
                     // The file's text will be printed here
-                    _this2.form.photo = event.target.result;
+                    _this3.form.photo = event.target.result;
                 };
                 reader.readAsDataURL(file);
             }

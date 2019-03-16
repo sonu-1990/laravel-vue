@@ -41,6 +41,10 @@ Route::group(
         Route::get('/delete-post/{id}', 'PostController@deletePost');
         Route::get('/edit-post/{id}', 'PostController@editPost');
         Route::post('/update-post/{id}', 'PostController@updatePost');
+
+        // FrontEnd
+        Route::get('/all-blog-posts', 'BlogController@allBlogPosts');
+
     }
 );
 

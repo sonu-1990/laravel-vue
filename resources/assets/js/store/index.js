@@ -2,7 +2,8 @@
 export default {
     state: {
         category : [],
-        post: []
+        post: [],
+        blogpost:[]
     },
     getters:{
         getCategory(state) {
@@ -10,7 +11,10 @@ export default {
         },
         getPost(state) {
             return state.post
-        }
+        },
+        getBlogPost(state){
+            return state.blogpost
+        },
     },
     actions: {
 
@@ -26,6 +30,12 @@ export default {
                 context.commit('posts', response.data.posts)
 
             })
+        },
+        allBlogPosts(context) {
+            axios.get('/all-blog-posts')
+            .then((response) => {
+                context.commit('blogPosts', response.data.posts)
+            })
         }
 
     },
@@ -35,6 +45,9 @@ export default {
         },
         posts(state, payload) {
             return state.post = payload
-        }
+        },
+        blogPosts(state,payload){
+            return state.blogpost = payload
+        },
     }
 }

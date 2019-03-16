@@ -1,11 +1,14 @@
 <template>
     <div>
-       This is home page.
+        <h2>This is Home Page</h2>
     </div>
 </template>
 
 <script>
     export default {
-       name: "PublicHome"
-    } 
+        name: "PublicHome"
+    }
 </script>
+
+<style scoped>
+</style>

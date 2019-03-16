@@ -1,11 +1,14 @@
 <template>
-    <div class="publicmain">
+    <div id="publimain">
         <router-view></router-view>
     </div>
 </template>
 
 <script>
     export default {
-       name: "PublicMaster"
+        name: "PublicMaster"
     }
 </script>
+
+<style scoped>
+</style> 

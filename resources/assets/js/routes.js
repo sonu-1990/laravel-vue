@@ -10,6 +10,7 @@ import PostEditComponent from './components/admin/post/EditComponent.vue';
 // FrontEnd
 import PublicHomeComponent from './components/public/PublicHome.vue';
 import BlogPostComponent from './components/public/blog/BlogPost.vue';
+import SingleBlogPost from './components/public/blog/SingleBlog.vue';
 
 
 
@@ -26,6 +27,5 @@ export const routes = [
     // Frontend Component
     { path: '/', component: PublicHomeComponent },
     { path: '/blog', component: BlogPostComponent },
-
-
+    { path: '/singlepost/:id', component: SingleBlogPost },
 ];

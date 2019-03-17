@@ -47,7 +47,10 @@
                         <li v-if="blogpost.category"><i class="icon-folder-open"></i><a href="#"> {{ blogpost.category.cat_name}}</a></li>
                         <li><i class="icon-comments"></i><a href="#">4 Comments</a></li>
                         </ul>
-                        <a href="#" class="pull-right">Continue reading <i class="icon-angle-right"></i></a>
+                        <router-link :to="`/singlepost/${blogpost.id}`" class="pull-right">
+                            Continue reading 
+                            <i class="icon-angle-right"></i>
+                        </router-link>
                     </div>
                     </div>
                 </div>

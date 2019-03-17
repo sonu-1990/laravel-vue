@@ -44,6 +44,7 @@ Route::group(
 
         // FrontEnd
         Route::get('/all-blog-posts', 'BlogController@allBlogPosts');
+        Route::get('/single-post/{id}', 'BlogController@singlePost');
 
     }
 );

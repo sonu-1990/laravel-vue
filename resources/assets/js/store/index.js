@@ -3,7 +3,8 @@ export default {
     state: {
         category : [],
         post: [],
-        blogpost:[]
+        blogpost:[],
+        singlepost:[],
     },
     getters:{
         getCategory(state) {
@@ -12,9 +13,12 @@ export default {
         getPost(state) {
             return state.post
         },
-        getBlogPost(state){
+        getBlogPost(state) {
             return state.blogpost
         },
+        getSinglePost(state) {
+            return state.singlepost
+        }
     },
     actions: {
 
@@ -36,6 +40,14 @@ export default {
             .then((response) => {
                 context.commit('blogPosts', response.data.posts)
             })
+        },
+        singleBlogPost(context, payload) {
+            axios.get('/single-post/'+ payload)
+            .then((response) => {
+                console.log(response.data.post);
+                context.commit('singlePost', response.data.post)
+
+            })
         }
 
     },
@@ -49,5 +61,8 @@ export default {
         blogPosts(state,payload){
             return state.blogpost = payload
         },
+        singlePost(state,payload) {
+            return state.singlepost = payload
+        }
     }
 }

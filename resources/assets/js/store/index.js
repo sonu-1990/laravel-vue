@@ -74,6 +74,14 @@ export default {
 
             })
         },
+        getPostBySearch(context, payload) {
+            axios.get('/get-post-by-search?s='+ payload)
+            .then((response) => {
+                context.commit('getPostBySearch', response.data.posts)
+
+            })
+        },
+
 
     },
     mutations: {
@@ -93,6 +101,9 @@ export default {
             return state.allcategories = payload
         },
         getPostByCatId(state, payload) {
+            state.blogpost = payload
+        },
+        getPostBySearch(state, payload) {
             state.blogpost = payload
         }
     }

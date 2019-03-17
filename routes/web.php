@@ -47,7 +47,7 @@ Route::group(
         Route::get('/single-post/{id}', 'BlogController@singlePost');
         Route::get('/categories', 'BlogController@allCategories');
         Route::get('/post-by-category/{id}', 'BlogController@allPostsByCategory');
-
+        Route::get('/get-post-by-search', 'BlogController@allPostBySearch');
     }
 );
 

@@ -91585,6 +91585,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 //
 //
 //
@@ -91638,6 +91640,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Sidebar",
@@ -91661,9 +91664,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        realSearch: function realSearch() {
+        realSearch: __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.debounce(function () {
             this.$store.dispatch('getPostBySearch', this.keyword);
-        }
+        }, 1000)
     }
 });
 

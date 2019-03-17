@@ -41,14 +41,19 @@ class BlogController extends Controller
     public function allPostBySearch() 
     {
         $search = \Request::get('s');
-        $posts = Post::with('user', 'category')
-        ->where('title', 'LIKE', "%$search%")
-        ->orWhere('description', 'LIKE', "%$search%")
-        ->orderBy('id', 'Desc')
-        ->get();
-        return response()->json([
-            'posts' => $posts
-        ], 200);
+        if ($search != null ) {
+            $posts = Post::with('user', 'category')
+            ->where('title', 'LIKE', "%$search%")
+            ->orWhere('description', 'LIKE', "%$search%")
+            ->orderBy('id', 'Desc')
+            ->get();
+            return response()->json([
+                'posts' => $posts
+            ], 200);
+        } else {
+            return $this->allBlogPosts();
+        }
+        
     }
     
 }

@@ -85679,13 +85679,15 @@ var index_esm = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     state: {
         category: [],
         post: [],
         blogpost: [],
-        singlepost: []
+        singlepost: [],
+        allcategories: []
     },
     getters: {
         getCategory: function getCategory(state) {
@@ -85699,9 +85701,12 @@ var index_esm = {
         },
         getSinglePost: function getSinglePost(state) {
             return state.singlepost;
+        },
+        allCategory: function allCategory(state) {
+            return state.allcategories;
         }
     },
-    actions: {
+    actions: _defineProperty({
         allCategory: function allCategory(context) {
             axios.get('/all-category').then(function (response) {
                 context.commit('categories', response.data.categories);
@@ -85714,16 +85719,26 @@ var index_esm = {
         },
         allBlogPosts: function allBlogPosts(context) {
             axios.get('/all-blog-posts').then(function (response) {
+                console.log(response.data.posts);
                 context.commit('blogPosts', response.data.posts);
             });
         },
         singleBlogPost: function singleBlogPost(context, payload) {
             axios.get('/single-post/' + payload).then(function (response) {
-                console.log(response.data.post);
                 context.commit('singlePost', response.data.post);
             });
+        },
+        allBlogCategories: function allBlogCategories(context) {
+            axios.get('/categories').then(function (response) {
+                console.log(response.data.categories);
+                context.commit('allcategories', response.data.categories);
+            });
         }
-    },
+    }, 'allBlogCategories', function allBlogCategories(context) {
+        axios.get('/categories').then(function (response) {
+            context.commit('allcategories', response.data.categories);
+        });
+    }),
     mutations: {
         categories: function categories(state, data) {
             return state.category = data;
@@ -85736,6 +85751,9 @@ var index_esm = {
         },
         singlePost: function singlePost(state, payload) {
             return state.singlepost = payload;
+        },
+        allcategories: function allcategories(state, payload) {
+            return state.allcategories = payload;
         }
     }
 });
@@ -91588,18 +91606,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "Sidebar"
+    name: "Sidebar",
+    computed: {
+        allCategories: function allCategories() {
+            return this.$store.getters.allCategory;
+        },
+        allBlogsPost: function allBlogsPost() {
+            return this.$store.getters.getBlogPost;
+        }
+    },
+    mounted: function mounted() {
+        this.$store.dispatch('allBlogCategories');
+        this.$store.dispatch('allBlogPosts');
+    }
 });
 
 /***/ }),
@@ -91610,171 +91631,121 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { attrs: { id: "sidebar" } }, [
+    _c("div", { staticClass: "span4" }, [
+      _c("aside", { staticClass: "right-sidebar" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "widget" }, [
+          _c("h5", { staticClass: "widgetheading" }, [_vm._v("Categories")]),
+          _vm._v(" "),
+          _c(
+            "ul",
+            { staticClass: "cat" },
+            _vm._l(_vm.allCategories, function(category) {
+              return _vm.allCategories
+                ? _c("li", [
+                    _c("i", { staticClass: "icon-angle-right" }),
+                    _vm._v(" "),
+                    _c("a", { attrs: { href: "#" } }, [
+                      _vm._v(_vm._s(category.cat_name))
+                    ]),
+                    _c("span", [_vm._v(" (20)")])
+                  ])
+                : _vm._e()
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "widget" }, [
+          _c("h5", { staticClass: "widgetheading" }, [_vm._v("Latest posts")]),
+          _vm._v(" "),
+          _c(
+            "ul",
+            { staticClass: "recent" },
+            _vm._l(_vm.allBlogsPost, function(post, index) {
+              return _vm.allBlogsPost && index < 5
+                ? _c("li", { key: post.id }, [
+                    _c("img", {
+                      staticClass: "pull-left",
+                      attrs: {
+                        src: "uploadimage/" + post.photo,
+                        alt: "",
+                        width: "40px",
+                        height: "40px"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("h6", [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _vm._v(_vm._s(post.title))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(
+                            _vm._f("shortLength")(post.description, 100, "...")
+                          ) +
+                          "\n                    "
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(1)
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "sidebar" } }, [
-      _c("div", { staticClass: "span4" }, [
-        _c("aside", { staticClass: "right-sidebar" }, [
-          _c("div", { staticClass: "widget" }, [
-            _c("form", { staticClass: "form-search" }, [
-              _c("input", {
-                staticClass: "input-medium search-query",
-                attrs: { placeholder: "Type something", type: "text" }
-              }),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-square btn-theme",
-                  attrs: { type: "submit" }
-                },
-                [_vm._v("Search")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "widget" }, [
-            _c("h5", { staticClass: "widgetheading" }, [_vm._v("Categories")]),
-            _vm._v(" "),
-            _c("ul", { staticClass: "cat" }, [
-              _c("li", [
-                _c("i", { staticClass: "icon-angle-right" }),
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Web design")]),
-                _c("span", [_vm._v(" (20)")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("i", { staticClass: "icon-angle-right" }),
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Online business")]),
-                _c("span", [_vm._v(" (11)")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("i", { staticClass: "icon-angle-right" }),
-                _c("a", { attrs: { href: "#" } }, [
-                  _vm._v("Marketing strategy")
-                ]),
-                _c("span", [_vm._v(" (9)")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("i", { staticClass: "icon-angle-right" }),
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Technology")]),
-                _c("span", [_vm._v(" (12)")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("i", { staticClass: "icon-angle-right" }),
-                _c("a", { attrs: { href: "#" } }, [_vm._v("About finance")]),
-                _c("span", [_vm._v(" (18)")])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "widget" }, [
-            _c("h5", { staticClass: "widgetheading" }, [
-              _vm._v("Latest posts")
-            ]),
-            _vm._v(" "),
-            _c("ul", { staticClass: "recent" }, [
-              _c("li", [
-                _c("img", {
-                  staticClass: "pull-left",
-                  attrs: { src: "img/dummies/blog/65x65/thumb1.jpg", alt: "" }
-                }),
-                _vm._v(" "),
-                _c("h6", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("Lorem ipsum dolor sit")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "\n                    Mazim alienum appellantur eu cu ullum officiis pro pri\n                    "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("img", {
-                    staticClass: "pull-left",
-                    attrs: { src: "img/dummies/blog/65x65/thumb2.jpg", alt: "" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("h6", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("Maiorum ponderum eum")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "\n                    Mazim alienum appellantur eu cu ullum officiis pro pri\n                    "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("img", {
-                    staticClass: "pull-left",
-                    attrs: { src: "img/dummies/blog/65x65/thumb3.jpg", alt: "" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("h6", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("Et mei iusto dolorum")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "\n                    Mazim alienum appellantur eu cu ullum officiis pro pri\n                    "
-                  )
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "widget" }, [
-            _c("h5", { staticClass: "widgetheading" }, [
-              _vm._v("Popular tags")
-            ]),
-            _vm._v(" "),
-            _c("ul", { staticClass: "tags" }, [
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Web design")])
-              ]),
-              _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Trends")])]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Technology")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Internet")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Tutorial")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Development")])
-              ])
-            ])
-          ])
-        ])
+    return _c("div", { staticClass: "widget" }, [
+      _c("form", { staticClass: "form-search" }, [
+        _c("input", {
+          staticClass: "input-medium search-query",
+          attrs: { placeholder: "Type something", type: "text" }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-square btn-theme",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Search")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "widget" }, [
+      _c("h5", { staticClass: "widgetheading" }, [_vm._v("Popular tags")]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "tags" }, [
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Web design")])]),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Trends")])]),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Technology")])]),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Internet")])]),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Tutorial")])]),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Development")])])
       ])
     ])
   }

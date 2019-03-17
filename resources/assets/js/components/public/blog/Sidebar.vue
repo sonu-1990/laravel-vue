@@ -11,35 +11,26 @@
                 <div class="widget">
                     <h5 class="widgetheading">Categories</h5>
                     <ul class="cat">
-                    <li><i class="icon-angle-right"></i><a href="#">Web design</a><span> (20)</span></li>
-                    <li><i class="icon-angle-right"></i><a href="#">Online business</a><span> (11)</span></li>
-                    <li><i class="icon-angle-right"></i><a href="#">Marketing strategy</a><span> (9)</span></li>
-                    <li><i class="icon-angle-right"></i><a href="#">Technology</a><span> (12)</span></li>
-                    <li><i class="icon-angle-right"></i><a href="#">About finance</a><span> (18)</span></li>
+                    <li v-if="allCategories" v-for="category in allCategories">
+                        <i class="icon-angle-right"></i>
+                        <a href="#">{{ category.cat_name }}</a><span> (20)</span>
+                    </li>
                     </ul>
                 </div>
                 <div class="widget">
                     <h5 class="widgetheading">Latest posts</h5>
                     <ul class="recent">
-                    <li>
-                        <img src="img/dummies/blog/65x65/thumb1.jpg" class="pull-left" alt="" />
-                        <h6><a href="#">Lorem ipsum dolor sit</a></h6>
+                    <li v-if="allBlogsPost && index < 5 " v-for="(post, index) in allBlogsPost" 
+                    :key="post.id">
+                        <img :src="`uploadimage/${post.photo}`" 
+                        class="pull-left" 
+                        alt=""
+                        width="40px"
+                        height="40px"
+                         />
+                        <h6><a href="#">{{post.title}}</a></h6>
                         <p>
-                        Mazim alienum appellantur eu cu ullum officiis pro pri
-                        </p>
-                    </li>
-                    <li>
-                        <a href="#"><img src="img/dummies/blog/65x65/thumb2.jpg" class="pull-left" alt="" /></a>
-                        <h6><a href="#">Maiorum ponderum eum</a></h6>
-                        <p>
-                        Mazim alienum appellantur eu cu ullum officiis pro pri
-                        </p>
-                    </li>
-                    <li>
-                        <a href="#"><img src="img/dummies/blog/65x65/thumb3.jpg" class="pull-left" alt="" /></a>
-                        <h6><a href="#">Et mei iusto dolorum</a></h6>
-                        <p>
-                        Mazim alienum appellantur eu cu ullum officiis pro pri
+                            {{ post.description |  shortLength(100, '...') }}
                         </p>
                     </li>
                     </ul>
@@ -62,7 +53,19 @@
     
     <script>
         export default {
-            name: "Sidebar"
+            name: "Sidebar",
+            computed: {
+                allCategories() {
+                    return this.$store.getters.allCategory 
+                },
+                allBlogsPost() {
+                    return this.$store.getters.getBlogPost 
+                }
+            },
+            mounted() {
+                this.$store.dispatch('allBlogCategories')
+                this.$store.dispatch('allBlogPosts')
+            },
         } 
     </script>
     

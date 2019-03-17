@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Category;
 
 class BlogController extends Controller
 {
@@ -19,6 +20,14 @@ class BlogController extends Controller
         $post = Post::with('user', 'category')->where('id', $id)->first();
         return response()->json([
             'post' => $post
+        ], 200);
+    }
+
+    public function allCategories() 
+    {
+        $categories = Category::all();
+        return response()->json([
+            'categories' => $categories
         ], 200);
     }
     

@@ -65,12 +65,12 @@
                     return this.$store.getters.allCategory 
                 },
                 allBlogsPost() {
-                    return this.$store.getters.getBlogPost 
+                    return this.$store.getters.latestPost 
                 }
             },
             mounted() {
                 this.$store.dispatch('allBlogCategories')
-                this.$store.dispatch('allBlogPosts')
+                this.$store.dispatch('latestPost')
             },
             methods: {
                 realSearch:_.debounce(function(){

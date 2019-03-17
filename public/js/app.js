@@ -85689,7 +85689,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         post: [],
         blogpost: [],
         singlepost: [],
-        allcategories: []
+        allcategories: [],
+        latestPost: []
     },
     getters: {
         getCategory: function getCategory(state) {
@@ -85706,6 +85707,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         allCategory: function allCategory(state) {
             return state.allcategories;
+        },
+        latestPost: function latestPost(state) {
+            return state.latestPost;
         }
     },
     actions: (_actions = {
@@ -85747,6 +85751,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         axios.get('/get-post-by-search?s=' + payload).then(function (response) {
             context.commit('getPostBySearch', response.data.posts);
         });
+    }), _defineProperty(_actions, 'latestPost', function latestPost(context) {
+        axios.get('/latest-post').then(function (response) {
+            context.commit('latestPost', response.data.posts);
+        });
     }), _actions),
     mutations: {
         categories: function categories(state, data) {
@@ -85769,6 +85777,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         getPostBySearch: function getPostBySearch(state, payload) {
             state.blogpost = payload;
+        },
+        latestPost: function latestPost(state, payload) {
+            state.latestPost = payload;
         }
     }
 });
@@ -91655,12 +91666,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.$store.getters.allCategory;
         },
         allBlogsPost: function allBlogsPost() {
-            return this.$store.getters.getBlogPost;
+            return this.$store.getters.latestPost;
         }
     },
     mounted: function mounted() {
         this.$store.dispatch('allBlogCategories');
-        this.$store.dispatch('allBlogPosts');
+        this.$store.dispatch('latestPost');
     },
 
     methods: {

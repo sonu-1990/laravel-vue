@@ -48,6 +48,7 @@ Route::group(
         Route::get('/categories', 'BlogController@allCategories');
         Route::get('/post-by-category/{id}', 'BlogController@allPostsByCategory');
         Route::get('/get-post-by-search', 'BlogController@allPostBySearch');
+        Route::get('/latest-post', 'BlogController@latestPosts');
     }
 );
 

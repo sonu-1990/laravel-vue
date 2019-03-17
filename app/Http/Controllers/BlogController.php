@@ -30,5 +30,13 @@ class BlogController extends Controller
             'categories' => $categories
         ], 200);
     }
+    public function allPostsByCategory($id) 
+    {
+        $posts = Post::with('user', 'category')->where('cat_id', $id)->orderBy('id','Desc')->get();
+        return response()->json([
+            'posts' => $posts
+        ], 200);
+
+    }
     
 }

@@ -85679,6 +85679,8 @@ var index_esm = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+var _actions;
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -85706,7 +85708,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             return state.allcategories;
         }
     },
-    actions: _defineProperty({
+    actions: (_actions = {
         allCategory: function allCategory(context) {
             axios.get('/all-category').then(function (response) {
                 context.commit('categories', response.data.categories);
@@ -85719,7 +85721,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         allBlogPosts: function allBlogPosts(context) {
             axios.get('/all-blog-posts').then(function (response) {
-                console.log(response.data.posts);
                 context.commit('blogPosts', response.data.posts);
             });
         },
@@ -85730,15 +85731,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         allBlogCategories: function allBlogCategories(context) {
             axios.get('/categories').then(function (response) {
-                console.log(response.data.categories);
                 context.commit('allcategories', response.data.categories);
             });
         }
-    }, 'allBlogCategories', function allBlogCategories(context) {
+    }, _defineProperty(_actions, 'allBlogCategories', function allBlogCategories(context) {
         axios.get('/categories').then(function (response) {
             context.commit('allcategories', response.data.categories);
         });
-    }),
+    }), _defineProperty(_actions, 'getPostByCatId', function getPostByCatId(context, payload) {
+        axios.get('/post-by-category/' + payload).then(function (response) {
+            console.log(response.data.posts);
+            context.commit('getPostByCatId', response.data.posts);
+        });
+    }), _actions),
     mutations: {
         categories: function categories(state, data) {
             return state.category = data;
@@ -85754,6 +85759,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         allcategories: function allcategories(state, payload) {
             return state.allcategories = payload;
+        },
+        getPostByCatId: function getPostByCatId(state, payload) {
+            state.blogpost = payload;
         }
     }
 });
@@ -88706,7 +88714,7 @@ var routes = [{ path: '/home', component: __WEBPACK_IMPORTED_MODULE_0__component
 { path: '/post-list', component: __WEBPACK_IMPORTED_MODULE_5__components_admin_post_ListComponent_vue___default.a }, { path: '/add-post', component: __WEBPACK_IMPORTED_MODULE_6__components_admin_post_AddComponent_vue___default.a }, { path: '/edit-post/:postId', component: __WEBPACK_IMPORTED_MODULE_7__components_admin_post_EditComponent_vue___default.a },
 
 // Frontend Component
-{ path: '/', component: __WEBPACK_IMPORTED_MODULE_8__components_public_PublicHome_vue___default.a }, { path: '/blog', component: __WEBPACK_IMPORTED_MODULE_9__components_public_blog_BlogPost_vue___default.a }, { path: '/singlepost/:id', component: __WEBPACK_IMPORTED_MODULE_10__components_public_blog_SingleBlog_vue___default.a }];
+{ path: '/', component: __WEBPACK_IMPORTED_MODULE_8__components_public_PublicHome_vue___default.a }, { path: '/blog', component: __WEBPACK_IMPORTED_MODULE_9__components_public_blog_BlogPost_vue___default.a }, { path: '/singlepost/:id', component: __WEBPACK_IMPORTED_MODULE_10__components_public_blog_SingleBlog_vue___default.a }, { path: '/categories/:id', component: __WEBPACK_IMPORTED_MODULE_9__components_public_blog_BlogPost_vue___default.a }];
 
 /***/ }),
 /* 262 */
@@ -91396,7 +91404,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -91481,23 +91489,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-   name: "BlogPost",
-   components: {
-      BlogSidebar: __WEBPACK_IMPORTED_MODULE_0__Sidebar_vue___default.a
-   },
-   mounted: function mounted() {
-      this.$store.dispatch('allBlogPosts');
-   },
+    name: "BlogPost",
+    components: {
+        BlogSidebar: __WEBPACK_IMPORTED_MODULE_0__Sidebar_vue___default.a
+    },
+    mounted: function mounted() {
+        this.$store.dispatch('allBlogPosts');
+    },
 
-   computed: {
-      allBlogPosts: function allBlogPosts() {
-         return this.$store.getters.getBlogPost;
-      }
-   },
-   methods: {}
+    computed: {
+        allBlogPosts: function allBlogPosts() {
+            return this.$store.getters.getBlogPost;
+        }
+    },
+    methods: {
+        getAllCategoryPost: function getAllCategoryPost() {
+            if (this.$route.params.id != null) {
+                this.$store.dispatch('getPostByCatId', this.$route.params.id);
+            } else {
+                this.$store.dispatch('allBlogPosts');
+            }
+        }
+    },
+    watch: {
+        $route: function $route(to, from) {
+            this.getAllCategoryPost();
+        }
+    }
 });
 
 /***/ }),
@@ -91644,14 +91669,20 @@ var render = function() {
             { staticClass: "cat" },
             _vm._l(_vm.allCategories, function(category) {
               return _vm.allCategories
-                ? _c("li", [
-                    _c("i", { staticClass: "icon-angle-right" }),
-                    _vm._v(" "),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v(_vm._s(category.cat_name))
-                    ]),
-                    _c("span", [_vm._v(" (20)")])
-                  ])
+                ? _c(
+                    "li",
+                    [
+                      _c("i", { staticClass: "icon-angle-right" }),
+                      _vm._v(" "),
+                      _c(
+                        "router-link",
+                        { attrs: { to: "/categories/" + category.id } },
+                        [_vm._v(_vm._s(category.cat_name))]
+                      ),
+                      _c("span", [_vm._v(" (20)")])
+                    ],
+                    1
+                  )
                 : _vm._e()
             }),
             0
@@ -91677,11 +91708,17 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _c("h6", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v(_vm._s(post.title))
-                      ])
-                    ]),
+                    _c(
+                      "h6",
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { to: "/singlepost/" + post.id } },
+                          [_vm._v(_vm._s(post.title))]
+                        )
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c("p", [
                       _vm._v(
@@ -91786,21 +91823,37 @@ var render = function() {
                       _c("div", { staticClass: "span8" }, [
                         _c("div", { staticClass: "post-image" }, [
                           _c("div", { staticClass: "post-heading" }, [
-                            _c("h3", [
-                              _c("a", { attrs: { href: "#" } }, [
-                                _vm._v(_vm._s(blogpost.title))
-                              ])
-                            ])
+                            _c(
+                              "h3",
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: { to: "/singlepost/" + blogpost.id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(blogpost.title) +
+                                        "\n                        "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
                           ]),
                           _vm._v(" "),
-                          _c("img", {
-                            attrs: {
-                              src: "uploadimage/" + blogpost.photo,
-                              alt: "",
-                              width: "300px",
-                              height: "100px"
-                            }
-                          })
+                          blogpost.photo
+                            ? _c("img", {
+                                attrs: {
+                                  src: "uploadimage/" + blogpost.photo,
+                                  alt: "",
+                                  width: "300px",
+                                  height: "100px"
+                                }
+                              })
+                            : _vm._e()
                         ]),
                         _vm._v(" "),
                         _c("p", [
@@ -92062,7 +92115,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-        this.$store.dispatch('singleBlogPost', this.$route.params.id);
+        this.getSinglePost();
     },
 
     components: {
@@ -92071,6 +92124,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         singlePost: function singlePost() {
             return this.$store.getters.getSinglePost;
+        }
+    },
+    methods: {
+        getSinglePost: function getSinglePost() {
+            this.$store.dispatch('singleBlogPost', this.$route.params.id);
+        }
+    },
+    watch: {
+        $route: function $route(to, from) {
+            this.getSinglePost();
         }
     }
 });

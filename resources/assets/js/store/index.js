@@ -42,7 +42,6 @@ export default {
         allBlogPosts(context) {
             axios.get('/all-blog-posts')
             .then((response) => {
-                console.log(response.data.posts);
                 context.commit('blogPosts', response.data.posts)
             })
         },
@@ -56,7 +55,6 @@ export default {
         allBlogCategories (context) {
             axios.get('/categories')
                 .then((response) => {
-                    console.log(response.data.categories);
                     context.commit('allcategories', response.data.categories)
                 })
         },
@@ -66,6 +64,15 @@ export default {
                 .then((response) => {
                     context.commit('allcategories', response.data.categories)
                 })
+        },
+
+        getPostByCatId(context, payload) {
+            axios.get('/post-by-category/'+ payload)
+            .then((response) => {
+                console.log(response.data.posts);
+                context.commit('getPostByCatId', response.data.posts)
+
+            })
         },
 
     },
@@ -84,6 +91,9 @@ export default {
         },
         allcategories(state,payload) {
             return state.allcategories = payload
+        },
+        getPostByCatId(state, payload) {
+            state.blogpost = payload
         }
     }
 }

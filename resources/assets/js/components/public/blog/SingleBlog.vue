@@ -43,7 +43,7 @@
     import BlogSidebar from './Sidebar.vue';
     export default {
         mounted() {
-            this.$store.dispatch('singleBlogPost', this.$route.params.id)
+            this.getSinglePost();
         },
         components: {
             BlogSidebar,
@@ -52,6 +52,16 @@
             singlePost() {
                 return this.$store.getters.getSinglePost
             },
+        },
+        methods: {
+            getSinglePost() {
+                this.$store.dispatch('singleBlogPost', this.$route.params.id)
+            },
+        },
+        watch: {
+            $route(to, from) {
+                this.getSinglePost();
+            }
         }
     }
 </script>

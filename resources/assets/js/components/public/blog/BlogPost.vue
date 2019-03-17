@@ -29,9 +29,13 @@
                     <div class="span8">
                     <div class="post-image">
                         <div class="post-heading">
-                        <h3><a href="#">{{blogpost.title}}</a></h3>
+                        <h3>
+                            <router-link :to="`/singlepost/${blogpost.id}`">
+                                {{blogpost.title}}
+                            </router-link>
+                        </h3>
                         </div>
-                        <img :src="`uploadimage/${blogpost.photo}`" 
+                        <img v-if="blogpost.photo" :src="`uploadimage/${blogpost.photo}`" 
                         alt=""  
                         width="300px"
                         height="100px"
@@ -78,7 +82,7 @@
                 BlogSidebar 
            },
            mounted() {
-              this.$store.dispatch('allBlogPosts') 
+            this.$store.dispatch('allBlogPosts') 
            },
            computed: {
                allBlogPosts() {
@@ -86,6 +90,18 @@
                }
            },
            methods: {
+              getAllCategoryPost() {
+                    if (this.$route.params.id != null) {
+                        this.$store.dispatch('getPostByCatId', this.$route.params.id)
+                    } else {
+                        this.$store.dispatch('allBlogPosts') 
+                    }
+              } 
+           },
+           watch: {
+               $route(to, from) {
+                    this.getAllCategoryPost();
+               }
                
            },
         }

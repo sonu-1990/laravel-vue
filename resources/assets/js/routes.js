@@ -28,4 +28,5 @@ export const routes = [
     { path: '/', component: PublicHomeComponent },
     { path: '/blog', component: BlogPostComponent },
     { path: '/singlepost/:id', component: SingleBlogPost },
+    { path: '/categories/:id', component: BlogPostComponent },
 ];

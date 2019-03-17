@@ -13,7 +13,7 @@
                     <ul class="cat">
                     <li v-if="allCategories" v-for="category in allCategories">
                         <i class="icon-angle-right"></i>
-                        <a href="#">{{ category.cat_name }}</a><span> (20)</span>
+                        <router-link :to="`/categories/${category.id}`">{{ category.cat_name }}</router-link><span> (20)</span>
                     </li>
                     </ul>
                 </div>
@@ -28,11 +28,11 @@
                         width="40px"
                         height="40px"
                          />
-                        <h6><a href="#">{{post.title}}</a></h6>
+                        <h6><router-link :to="`/singlepost/${post.id}`">{{post.title}}</router-link></h6>
                         <p>
-                            {{ post.description |  shortLength(100, '...') }}
+                            {{ post.description | shortLength(100, '...') }}
                         </p>
-                    </li>
+                    </li> 
                     </ul>
                 </div>
                 <div class="widget">
